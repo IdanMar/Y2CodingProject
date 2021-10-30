@@ -4,11 +4,11 @@
 	<title>Audio To Text</title>
 </head>
 <body>
-	<form action="/audio" method="POST">
-		<input type="file" accept=".mp3" required name="audio">
+	<form action="/audio" method="POST" enctype="multipart/form-data">
+		<input type="file" accept="audio/*" required name="audio" id="audio" enctype="multipart/form-data">
 		<button>Transcribe!</button>
 	</form>
-	<p>output:</p><br>
+	<p>output:</p>
 	<p>{{t}}</p>
 
 </body>

@@ -16,21 +16,39 @@ def login():
 		return render_template('login.html')
 	else:
 		if get_user_by_mail(request.form['email']) != None and request.form['password'] == get_user_by_mail(request.form['email']).word:
-			return redirect(url_for('ads'))
+			return redirect(url_for('audio'))
 		return render_template('login.html')
+
+@app.route("/signup", methods = ['GET','POST'])
+def signup():
+	if request.method == 'GET':
+		return render_template("signup.html")
+	else:
+		add_user(
+			name=request.form['signupname'],
+			email=request.form['signupemail'],
+			word=request.form['signupword'],
+			
+			 )
+
+		return redirect(url_for('audio'))
 
 @app.route("/aboutus")
 def aboutus():
 	return render_template('aboutus.html')
 
-@app.route("/audio")
+@app.route("/audio", methods = ['GET','POST'])
 def audio():
 	if request.method == 'GET':
-		return render_template('audio.html')
+		return render_template('audio.html', t="")
 	else:
-		src = request.form['audio']
+	
+
+		src = request.files['audio']
+		dst1 = "sound.mp3"
+		AudioSegment.from_file(src).export(dst1, format="mp3")
 		dst = "sound.wav"
-		sound = AudioSegment.from_mp3(src)
+		sound = AudioSegment.from_mp3(dst1)
 		sound.export(dst, format="wav")
 
 
