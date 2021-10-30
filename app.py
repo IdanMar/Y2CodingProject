@@ -28,6 +28,20 @@ def audio():
 	if request.method == 'GET':
 		return render_template('audio.html')
 	else:
+		src = request.form['audio']
+		dst = "sound.wav"
+		sound = AudioSegment.from_mp3(src)
+		sound.export(dst, format="wav")
+
+
+
+		r = sr.Recognizer()
+		hello = sr.AudioFile(dst)
+		with hello as source:
+			audio = r.record(source)
+		type(audio)
+		text = r.recognize_google(audio)
+		return render_template('audio.html', t = text)
 		
 
 

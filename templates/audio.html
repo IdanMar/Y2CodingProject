@@ -5,8 +5,11 @@
 </head>
 <body>
 	<form action="/audio" method="POST">
-		<input type="file" accept=".mp3" required>
+		<input type="file" accept=".mp3" required name="audio">
 		<button>Transcribe!</button>
 	</form>
+	<p>output:</p><br>
+	<p>{{t}}</p>
+
 </body>
 </html>
