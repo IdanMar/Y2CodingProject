@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect,url_for
 from databases import *
 
+import speech_recognition as sr
+from os import path
+from pydub import AudioSegment
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'iasas-food-is-good'
 
@@ -19,29 +23,37 @@ def login():
 def aboutus():
 	return render_template('aboutus.html')
 
-@app.route("/donations")
-def paypal():
-	return render_template('paypal.html')
-
-
-
-@app.route("/ads")
-def ads():
-	return render_template('ads.html')
-
-@app.route("/signupsub", methods = ['GET','POST'])
-def signup():
+@app.route("/audio")
+def audio():
 	if request.method == 'GET':
-		return render_template("homepage.html")
+		return render_template('audio.html')
 	else:
-		add_user(
-			name=request.form['signupname'],
-			email=request.form['signupemail'],
-			word=request.form['signupword'],
-			donate = 0
-			 )
+		
 
-		return redirect(url_for('ads'))
+
+# @app.route("/donations")
+# def paypal():
+# 	return render_template('paypal.html')
+
+
+
+# @app.route("/ads")
+# def ads():
+# 	return render_template('ads.html')
+
+# @app.route("/signupsub", methods = ['GET','POST'])
+# def signup():
+# 	if request.method == 'GET':
+# 		return render_template("homepage.html")
+# 	else:
+# 		add_user(
+# 			name=request.form['signupname'],
+# 			email=request.form['signupemail'],
+# 			word=request.form['signupword'],
+# 			donate = 0
+# 			 )
+
+# 		return redirect(url_for('ads'))
 
 @app.route("/")
 def index():
