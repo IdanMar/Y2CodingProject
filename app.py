@@ -52,13 +52,15 @@ def audio():
 		sound.export(dst, format="wav")
 
 
+		language = request.form['language']
+
 
 		r = sr.Recognizer()
 		hello = sr.AudioFile(dst)
 		with hello as source:
 			audio = r.record(source)
 		type(audio)
-		text = r.recognize_google(audio)
+		text = r.recognize_google(audio, language = language)
 		return render_template('audio.html', t = text)
 		
 
