@@ -15,7 +15,7 @@ def login():
 	if request.method == 'GET':
 		return render_template('login.html')
 	else:
-		if get_user_by_mail(request.form['email']) != None and request.form['password'] == get_user_by_mail(request.form['email']).word:
+		if get_user_by_mail(request.form['email']) != None and request.form['pass'] == get_user_by_mail(request.form['email']).word:
 			return redirect(url_for('audio'))
 		return render_template('login.html')
 
@@ -25,9 +25,9 @@ def signup():
 		return render_template("signup.html")
 	else:
 		add_user(
-			name=request.form['signupname'],
-			email=request.form['signupemail'],
-			word=request.form['signupword'],
+			name=request.form['name'],
+			email=request.form['email'],
+			word=request.form['pass'],
 			
 			 )
 
